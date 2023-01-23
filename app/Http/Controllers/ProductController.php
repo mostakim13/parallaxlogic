@@ -192,8 +192,8 @@ class ProductController extends Controller
     {
         $product = Product::where('id', $id)->withTrashed()->first();
         $productdetail = ProductDetail::where('product_id', $id)->withTrashed()->first();
-        if (isset($product->product_details->image_url)) {
-            unlink($product->product_details->image_url);
+        if ($productdetail->image_url != NULL) {
+            unlink($productdetail->image_url);
         }
         $product->forceDelete();
         $productdetail->forceDelete();
